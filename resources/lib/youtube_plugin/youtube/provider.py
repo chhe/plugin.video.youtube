@@ -427,7 +427,7 @@ class Provider(kodion.AbstractProvider):
 
     @kodion.RegisterProviderPath('^/sign/(?P<mode>.*)/$')
     def _on_sign(self, context, re_match):
-        mode = re_match.group('mode')            
+        mode = re_match.group('mode')
         yt_login.process(mode, self, context, re_match, context.get_settings().requires_dual_login())
         return True
 
@@ -582,6 +582,15 @@ class Provider(kodion.AbstractProvider):
                 context.create_resource_path('media', 'new_uploads.png'))
             my_subscriptions_item.set_fanart(self.get_fanart(context))
             result.append(my_subscriptions_item)
+            pass
+
+        if self.is_logged_in() and settings.get_bool('youtube.filter.mysub.enable', True):
+            # my subscription
+            my_subscriptions_filtered_item = DirectoryItem('My Subscriptions (Filtered)',
+                context.create_uri(['special', 'new_uploaded_videos_tv_filtered']),
+                context.create_resource_path('media', 'new_uploads.png'))
+            my_subscriptions_filtered_item.set_fanart(self.get_fanart(context))
+            result.append(my_subscriptions_filtered_item)
             pass
 
         # Recommendations

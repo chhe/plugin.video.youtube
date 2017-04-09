@@ -53,7 +53,12 @@
         <setting id="youtube.language" type="text" label="30523" enable="false" default="en-US"/>
         <setting id="youtube.region" type="text" label="30550" enable="false" default="US"/>
     </category>
-    
+
+    <category label="Filter">
+        <setting id="youtube.filter.mysub.enable" type="bool" label="Enable filtered My Subscriptions" default="false"/>
+        <setting id="youtube.filter.mysub.list" type="text" label="Channels to Filter" enable="eq(-1,true)" default=""/>
+    </category>
+
     <!-- personal api key -->
     <category label="30200">
         <setting id="youtube.api.enable" type="bool" label="30204" default="false"/>

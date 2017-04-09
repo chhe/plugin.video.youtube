@@ -5,18 +5,23 @@ from ...youtube.helper import utils
 from ...kodion.items.video_item import VideoItem
 
 
-def my_subscriptions_to_items(provider, context, json_data):
+def my_subscriptions_to_items(provider, context, json_data, do_filter=False):
     result = []
     video_id_dict = {}
 
+    filter_list = context.get_settings().get_string('youtube.filter.mysub.list').split(',')
+    filter_list = [x.lower() for x in filter_list]
+
     items = json_data.get('items', [])
     for item in items:
-        video_id = item['id']
-        video_item = VideoItem(item['title'],
-                               uri=context.create_uri(['play'], {'video_id': video_id}))
-        result.append(video_item)
+        channel = item['channel'].lower()
+        if not channel in filter_list or not do_filter:
+            video_id = item['id']
+            video_item = VideoItem(item['title'],
+                                uri=context.create_uri(['play'], {'video_id': video_id}))
+            result.append(video_item)
 
-        video_id_dict[video_id] = video_item
+            video_id_dict[video_id] = video_item
         pass
 
     channel_item_dict = {}
