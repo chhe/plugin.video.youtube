@@ -2,7 +2,10 @@
 <settings>
     <!-- kodion General -->
     <category label="30000">
-
+        <!-- these settings are invisible, they need to be defined because of changes in the current Leia nightlies -->
+        <setting id="kodion.access_token" type="text" visible="false" default=""/>
+        <setting id="kodion.access_token.expires" type="text" visible="false" default=""/>
+        <setting id="kodion.refresh_token" type="text" visible="false" default=""/>
         <!-- kodion Visual -->
         <setting id="kodion.video.quality" type="enum" label="30010" enable="eq(1,false)" lvalues="30016|30017|30011|30012|30018" default="3"/>
         <setting id="kodion.video.quality.ask" type="bool" label="30009" default="false"/>
